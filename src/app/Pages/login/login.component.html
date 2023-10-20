@@ -1,0 +1,26 @@
+<form  class="form" [formGroup]="myForm" (ngSubmit)="ingresar()">
+    <div>
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="pat@example.com" type="correo" formControlName="correo">
+        </mat-form-field> 
+        <div *ngIf="myForm.get('correo')?.errors && myForm.get('correo')?.dirty">
+            <p class="textError" *ngIf="myForm.get('correo')?.hasError('required')">El campo es obligatorio</p>
+        </div>
+    </div>
+  
+    <div>
+         <mat-form-field>
+            <mat-label>Contraseña</mat-label>
+            <input matInput type="password" formControlName="clave">
+        </mat-form-field> 
+    </div>
+     
+    <div *ngIf="myForm.get('clave')?.errors && myForm.get('clave')?.dirty" >
+        <p class="textError" *ngIf="myForm.get('clave')?.hasError('required')">El campo es obligatorio</p>
+        <p class="error" *ngIf="myForm.get('clave')?.hasError('minlength')">Debe tener entre 6 y 10 caracteres</p>
+        <p class="error" *ngIf="myForm.get('clave')?.hasError('maxlength')">Debe tener entre 6 y 10 caracteres</p>     
+    </div>
+
+        <button mat-raised-button color="warn" routerLink="" class="button" type="submit" [disabled]="myForm.invalid" (click)="login()">Iniciar sesión</button> 
+</form>    
